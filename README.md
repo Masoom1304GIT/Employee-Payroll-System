@@ -1,136 +1,186 @@
-# Employee-Payroll-System
+# Employee Payroll System
 
-A command-line based **Employee Payroll System** developed in Java to manage employee details and calculate employee salaries.
+A simple **command-line based Employee Payroll System** developed in Java.
+The project allows users to add, view, search, delete employees, and generate employee payslips.
 
-## 📌 Project Overview
+## Features
 
-The Employee Payroll System is a Java-based console application designed to simplify basic payroll management. It allows users to add employee information, view employee records, and calculate salary-related details through a command-line interface.
-
-The project is developed as part of the **VITyarthi Build Your Own Project** evaluation.
-
-## ✨ Features
-
-* Add employee details
-* Display employee information
-* Calculate employee salary
-* Manage multiple employees
-* Simple menu-driven interface
+* Add new employee records
+* Prevent duplicate Employee IDs
+* View all employees
+* Search employee by ID
+* Generate employee payslip
+* Calculate gross salary
+* Calculate net salary
+* Delete employee records
+* Validate salary values
+* Handle invalid menu input
 * Runs completely through the command line
-* No GUI or external software required
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 * **Java**
-* **Object-Oriented Programming (OOP)**
-* **Java Collections** *(if used)*
-* **Command Line / Terminal**
+* **ArrayList** – for storing employee records
+* **Scanner** – for taking user input
+* **Object-Oriented Programming (OOP)** concepts
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
-Employee-Payroll-System.javaproject/
+Employee-Payroll-System/
 │
-├── main.java
-├── Employee.java
-├── Payroll.java
+├── Main.java
 └── README.md
 ```
 
-> The exact files may vary depending on the final project implementation.
+## Employee Details
 
-## ⚙️ Requirements
+The system stores the following information for each employee:
 
-Before running the project, make sure you have:
+* Employee ID
+* Name
+* Department
+* Designation
+* Basic Salary
+* Allowances
+* Deductions
 
-* Java JDK installed
-* Command Prompt or PowerShell
-* Basic Java environment configured
+## Salary Calculation
 
-Check Java installation:
+### Gross Salary
+
+```text
+Gross Salary = Basic Salary + Allowances
+```
+
+### Net Salary
+
+```text
+Net Salary = Gross Salary - Deductions
+```
+
+## How to Run
+
+### 1. Install Java
+
+Make sure Java JDK is installed on your computer.
+
+Check the Java version using:
 
 ```bash
 java -version
+```
+
+Check the Java compiler using:
+
+```bash
 javac -version
 ```
 
-## ▶️ How to Run
+### 2. Compile the Program
 
-### 1. Clone the repository
-
-```bash
-git clone <YOUR-GITHUB-REPOSITORY-URL>
-```
-
-### 2. Open the project folder
+Open a terminal in the project folder and run:
 
 ```bash
-cd Employee-Payroll-System.javaproject
+javac Main.java
 ```
 
-### 3. Compile the Java program
+### 3. Run the Program
+
+After successful compilation, run:
 
 ```bash
-javac main.java
+java Main
 ```
 
-### 4. Run the program
+## Main Menu
 
-```bash
-java main
-```
-
-The application will start in the terminal and display the available options.
-
-## 🖥️ Execution
-
-The project is designed to be **fully executable from the command line**, without requiring a GUI-based development environment.
-
-Example:
+When the program starts, the following menu is displayed:
 
 ```text
-===== Employee Payroll System =====
+========================================
+       EMPLOYEE PAYROLL SYSTEM
+========================================
 1. Add Employee
-2. Display Employee
-3. Calculate Salary
-4. Exit
-
+2. View All Employees
+3. Search Employee
+4. Generate Payslip
+5. Delete Employee
+6. Exit
+========================================
 Enter your choice:
 ```
 
-## 🎯 Learning Objectives
+## Example
 
-This project demonstrates:
+After adding an employee, the system can generate a payslip similar to:
 
-* Java programming fundamentals
-* Classes and objects
-* Encapsulation
-* Methods and constructors
-* Conditional statements
-* Loops
-* User input handling
-* Basic payroll calculations
-* Command-line application development
+```text
+========================================
+              EMPLOYEE PAYSLIP
+========================================
+Employee ID  : 101
+Name         : Rahul
+Department   : IT
+Designation  : Software Developer
+----------------------------------------
+Basic Salary : 30000.00
+Allowances   : 5000.00
+Gross Salary : 35000.00
+Deductions   : 2000.00
+----------------------------------------
+Net Salary   : 33000.00
+========================================
+```
 
-## 🔮 Future Enhancements
+## Input Validation
 
-Possible future improvements include:
+The program includes basic validation:
 
-* File/database storage
-* Employee search and deletion
-* Attendance management
-* Tax calculation
-* Salary slips
-* Employee authentication
-* Database integration using JDBC
+* Employee IDs must be unique.
+* Salary values cannot be negative.
+* Invalid menu input is handled using exception handling.
+* The program displays an error message when an employee ID is not found.
+
+## OOP Concepts Used
+
+This project demonstrates several Java programming concepts:
+
+* **Class and Objects** – `Employee` class represents employee information.
+* **Encapsulation** – employee data and related methods are grouped inside the `Employee` class.
+* **Methods** – separate methods are used for adding, searching, displaying, deleting, and generating payslips.
+* **Constructor** – initializes employee information when an object is created.
+* **ArrayList** – stores multiple employee objects.
+* **Exception Handling** – handles invalid user input using `try-catch`.
+* **Loops and Conditional Statements** – used for menu operations and employee searching.
+
+## Limitations
+
+* Employee data is stored only in memory.
+* Data is lost when the program is closed.
+* The project does not use a database or file storage.
+* It is designed as a command-line application.
+
+## Future Enhancements
+
+The project can be improved by adding:
+
+* File-based data storage
+* Database connectivity using JDBC
+* Employee update functionality
+* Payroll history
+* Employee login/authentication
+* Monthly salary reports
+* Tax and bonus calculations
 * Graphical user interface
 
-## 👨‍💻 Author
+## Author
 
-**Ali Masum**
+**Masoom Ali**
 
 B.Tech CSE (AI/ML)
 VIT Bhopal University
 
-## 📄 License
+## License
 
-This project is created for academic and educational purposes.
+This project is created for educational and academic purposes.
