@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    // Employee class
     static class Employee {
         int id;
         String name;
@@ -15,7 +14,6 @@ public class Main {
 
         Employee(int id, String name, String department, String designation,
                  double basicSalary, double allowances, double deductions) {
-
             this.id = id;
             this.name = name;
             this.department = department;
@@ -48,160 +46,120 @@ public class Main {
         }
     }
 
-    // List of employees
     static ArrayList<Employee> employees = new ArrayList<>();
 
-    // Find employee by ID
+    // returns null if nobody has that id
     static Employee findEmployee(int id) {
-
-        for (Employee employee : employees) {
-            if (employee.id == id) {
-                return employee;
-            }
+        for (Employee e : employees) {
+            if (e.id == id) return e;
         }
-
         return null;
     }
 
-    // Add employee
-    static void addEmployee(Scanner scanner) {
-
+    static void addEmployee(Scanner sc) {
         System.out.println("\n========== ADD EMPLOYEE ==========");
-
         System.out.print("Enter Employee ID: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
+        int id = sc.nextInt();
+        sc.nextLine();
 
         if (findEmployee(id) != null) {
-            System.out.println("Employee ID already exists.");
+            System.out.println("That ID is already taken.");
             return;
         }
 
         System.out.print("Enter Name: ");
-        String name = scanner.nextLine();
-
+        String name = sc.nextLine();
         System.out.print("Enter Department: ");
-        String department = scanner.nextLine();
-
+        String dept = sc.nextLine();
         System.out.print("Enter Designation: ");
-        String designation = scanner.nextLine();
+        String designation = sc.nextLine();
 
         System.out.print("Enter Basic Salary: ");
-        double basicSalary = scanner.nextDouble();
-
+        double basic = sc.nextDouble();
         System.out.print("Enter Allowances: ");
-        double allowances = scanner.nextDouble();
-
+        double allowances = sc.nextDouble();
         System.out.print("Enter Deductions: ");
-        double deductions = scanner.nextDouble();
+        double deductions = sc.nextDouble();
 
-        if (basicSalary < 0 || allowances < 0 || deductions < 0) {
-            System.out.println("Salary values cannot be negative.");
+        if (basic < 0 || allowances < 0 || deductions < 0) {
+            System.out.println("Salary fields can't be negative, try again.");
             return;
         }
 
-        Employee employee = new Employee(
-                id,
-                name,
-                department,
-                designation,
-                basicSalary,
-                allowances,
-                deductions
-        );
-
-        employees.add(employee);
-
-        System.out.println("Employee added successfully.");
+        employees.add(new Employee(id, name, dept, designation, basic, allowances, deductions));
+        System.out.println("Employee added.");
     }
 
-    // Display all employees
     static void viewEmployees() {
-
         System.out.println("\n========== EMPLOYEE LIST ==========");
 
         if (employees.isEmpty()) {
-            System.out.println("No employees found.");
+            System.out.println("Nothing to show yet - no employees on file.");
             return;
         }
 
-        for (Employee employee : employees) {
-            employee.display();
+        for (Employee e : employees) {
+            e.display();
         }
     }
 
-    // Search employee
-    static void searchEmployee(Scanner scanner) {
-
+    static void searchEmployee(Scanner sc) {
         System.out.println("\n========== SEARCH EMPLOYEE ==========");
-
         System.out.print("Enter Employee ID: ");
-        int id = scanner.nextInt();
+        int id = sc.nextInt();
 
-        Employee employee = findEmployee(id);
-
-        if (employee == null) {
-            System.out.println("Employee not found.");
+        Employee e = findEmployee(id);
+        if (e == null) {
+            System.out.println("No employee with that ID.");
         } else {
-            employee.display();
+            e.display();
         }
     }
 
-    // Generate payslip
-    static void generatePayslip(Scanner scanner) {
-
+    static void generatePayslip(Scanner sc) {
         System.out.println("\n========== GENERATE PAYSLIP ==========");
-
         System.out.print("Enter Employee ID: ");
-        int id = scanner.nextInt();
+        int id = sc.nextInt();
 
-        Employee employee = findEmployee(id);
-
-        if (employee == null) {
-            System.out.println("Employee not found.");
+        Employee e = findEmployee(id);
+        if (e == null) {
+            System.out.println("No employee with that ID.");
             return;
         }
 
         System.out.println("\n========================================");
         System.out.println("              EMPLOYEE PAYSLIP");
         System.out.println("========================================");
-        System.out.println("Employee ID  : " + employee.id);
-        System.out.println("Name         : " + employee.name);
-        System.out.println("Department   : " + employee.department);
-        System.out.println("Designation  : " + employee.designation);
+        System.out.println("Employee ID  : " + e.id);
+        System.out.println("Name         : " + e.name);
+        System.out.println("Department   : " + e.department);
+        System.out.println("Designation  : " + e.designation);
         System.out.println("----------------------------------------");
-        System.out.printf("Basic Salary : %.2f%n", employee.basicSalary);
-        System.out.printf("Allowances   : %.2f%n", employee.allowances);
-        System.out.printf("Gross Salary : %.2f%n", employee.grossSalary());
-        System.out.printf("Deductions   : %.2f%n", employee.deductions);
+        System.out.printf("Basic Salary : %.2f%n", e.basicSalary);
+        System.out.printf("Allowances   : %.2f%n", e.allowances);
+        System.out.printf("Gross Salary : %.2f%n", e.grossSalary());
+        System.out.printf("Deductions   : %.2f%n", e.deductions);
         System.out.println("----------------------------------------");
-        System.out.printf("Net Salary   : %.2f%n", employee.netSalary());
+        System.out.printf("Net Salary   : %.2f%n", e.netSalary());
         System.out.println("========================================");
     }
 
-    // Delete employee
-    static void deleteEmployee(Scanner scanner) {
-
+    static void deleteEmployee(Scanner sc) {
         System.out.println("\n========== DELETE EMPLOYEE ==========");
-
         System.out.print("Enter Employee ID: ");
-        int id = scanner.nextInt();
+        int id = sc.nextInt();
 
-        Employee employee = findEmployee(id);
-
-        if (employee == null) {
-            System.out.println("Employee not found.");
+        Employee e = findEmployee(id);
+        if (e == null) {
+            System.out.println("No employee with that ID.");
         } else {
-            employees.remove(employee);
-            System.out.println("Employee deleted successfully.");
+            employees.remove(e);
+            System.out.println("Employee removed.");
         }
     }
 
-    // Main method
     public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-
+        Scanner sc = new Scanner(System.in);
         int choice;
 
         do {
@@ -215,59 +173,29 @@ public class Main {
             System.out.println("5. Delete Employee");
             System.out.println("6. Exit");
             System.out.println("========================================");
-
             System.out.print("Enter your choice: ");
 
             try {
-
-                choice = scanner.nextInt();
+                choice = sc.nextInt();
 
                 switch (choice) {
-
-                    case 1:
-                        addEmployee(scanner);
-                        break;
-
-                    case 2:
-                        viewEmployees();
-                        break;
-
-                    case 3:
-                        searchEmployee(scanner);
-                        break;
-
-                    case 4:
-                        generatePayslip(scanner);
-                        break;
-
-                    case 5:
-                        deleteEmployee(scanner);
-                        break;
-
-                    case 6:
-                        System.out.println(
-                            "Thank you for using Employee Payroll System!"
-                        );
-                        break;
-
-                    default:
-                        System.out.println(
-                            "Invalid choice. Please try again."
-                        );
+                    case 1 -> addEmployee(sc);
+                    case 2 -> viewEmployees();
+                    case 3 -> searchEmployee(sc);
+                    case 4 -> generatePayslip(sc);
+                    case 5 -> deleteEmployee(sc);
+                    case 6 -> System.out.println("Thanks for using the Employee Payroll System!");
+                    default -> System.out.println("Not a valid option, try again.");
                 }
 
             } catch (Exception e) {
-
-                System.out.println(
-                    "Invalid input. Please enter a valid value."
-                );
-
-                scanner.nextLine();
+                System.out.println("That input doesn't look right - please try again.");
+                sc.nextLine();
                 choice = 0;
             }
 
         } while (choice != 6);
 
-        scanner.close();
+        sc.close();
     }
 }
